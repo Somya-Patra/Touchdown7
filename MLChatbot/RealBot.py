@@ -101,7 +101,7 @@ top = Tk()
 top.geometry('400x600')
 top.resizable(height=FALSE,width=FALSE)
 top.title("Chatbot")
-top.configure(bg='yellow')
+top.configure(bg="#a3a3a3")
 #top.protocol("WM_DELETE_WINDOW",on_closing)       #close button event
 
 #Create Chat window
@@ -114,7 +114,7 @@ scroll = Scrollbar(top,command=Chatlog.yview(),cursor='heart')
 Chatlog['yscrollcommand']=scroll.set
 
 #Create button to tell the bot
-B = Button(top,text="Tell",width=10,height=2,bg='green',fg='white',command=send)
+B = Button(top,text="Tell",width=10,height=2,bg='yellow',fg='black',command=send)
 
 #Create box to enter text
 Entrybox = Text(top,bd=0,bg='white',width=29,height=5,font='Arial')

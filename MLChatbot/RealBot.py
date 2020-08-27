@@ -1,6 +1,7 @@
 import nltk
 import random
 import string
+import pyttsx3
 
 f=open('medical.txt','r',errors = 'ignore')
 raw=f.read()
@@ -83,11 +84,12 @@ def send():
     Entrybox.delete("0.0",END)
 
     if msg in l:
+        bye("Have a nice day! see ya")
         on_closing()
     if msg != '':
         Chatlog.config(state=NORMAL)
         Chatlog.delete("0.0",END)
-        Chatlog.insert(END,"You:"+ msg + '\n\n')
+        Chatlog.insert(END,"YOU:"+ msg + '\n\n')
         Chatlog.config(foreground="#442265",font=("Verdana",12))
 
         res = chatresponse(msg)
@@ -95,10 +97,24 @@ def send():
 
         Chatlog.config(state=DISABLED)
 
+# Implement voice reader
+eng = pyttsx3.init('sapi5')
+voices = eng.getProperty('voices')
+eng.setProperty('voice',voices[0].id)
+
+def bye(audio):
+    eng.say(audio)
+    eng.runAndWait()
+
+def speak():
+    re = Chatlog.get("1.0","end-1c")
+    eng.say(re)
+    eng.runAndWait()
+
 
 from tkinter import *
 top = Tk()
-top.geometry('400x600')
+top.geometry('500x605')
 top.resizable(height=FALSE,width=FALSE)
 top.title("Chatbot")
 top.configure(bg="#a3a3a3")
@@ -115,6 +131,7 @@ Chatlog['yscrollcommand']=scroll.set
 
 #Create button to tell the bot
 B = Button(top,text="Tell",width=10,height=2,bg='yellow',fg='black',command=send)
+Lb = Button(top,text="Listen",width=10,height=2,bg='cyan',fg='black',command=speak)
 
 #Create box to enter text
 Entrybox = Text(top,bd=0,bg='white',width=29,height=5,font='Arial')
@@ -122,9 +139,10 @@ Entrybox.bind('<Return>',None)
 
 
 #Place all components in screen
-scroll.place(x=369,y=6,height=430)
-Chatlog.place(x=20,y=6,height=430,width=350)
-Entrybox.place(x=20,y=455,height=90,width=360)
-B.place(x=310,y=550)
+scroll.place(x=471,y=6,height=400)
+Chatlog.place(x=20,y=6,height=400,width=450)
+Entrybox.place(x=20,y=460,height=90,width=460)
+B.place(x=410,y=555)
+Lb.place(x=410,y=411)
 
 top.mainloop()

@@ -89,11 +89,11 @@ def send():
     if msg != '':
         Chatlog.config(state=NORMAL)
         Chatlog.delete("0.0",END)
-        Chatlog.insert(END,"YOU:"+ msg + '\n\n')
+        Chatlog.insert(END,"YOU SAID:"+ msg + '\n\n')
         Chatlog.config(foreground="#442265",font=("Verdana",12))
 
         res = chatresponse(msg)
-        Chatlog.insert(END,"ROBO:"+ res + '\n\n')
+        Chatlog.insert(END,"ROBO SAYS:"+ res + '\n\n')
 
         Chatlog.config(state=DISABLED)
 

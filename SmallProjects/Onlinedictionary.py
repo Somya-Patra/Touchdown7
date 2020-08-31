@@ -19,7 +19,7 @@ def diction(y):
 
 def send():
     msg = Entrybox.get("1.21","end-1c")
-    Entrybox.delete("0.0",END)
+    Entrybox.delete("1.21",END)
 
     if msg != '':
         Chatlog.config(state=NORMAL)

@@ -8,7 +8,7 @@ def diction(y):
     url = root+y
     r = requests.get(url)
     soup = bs(r.content,"lxml")
-    definitions = soup.find_all("h3",{"class":"definition"})
+    definitions = soup.find_all("div",{"class":"definition"})
     if len(definitions)==0:
         res += "Word not found."
         return res
@@ -19,7 +19,8 @@ def diction(y):
 
 def send():
     msg = Entrybox.get("1.21","end-1c")
-    Entrybox.delete("1.21",END)
+    Entrybox.delete("0.0",END)
+    Entrybox.insert(END,"Enter the word here: ")
 
     if msg != '':
         Chatlog.config(state=NORMAL)
